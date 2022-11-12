@@ -27,7 +27,7 @@ public class DriverManager {
     public DriverManager() {
         PageFactory.initElements(driver, this);
     }
-
+// my method to run test in different browser
     public void runOnLocalBrowser() throws IllegalAccessException {
         switch (browser) {
             case "chrome":
