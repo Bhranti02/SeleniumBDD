@@ -26,6 +26,7 @@ public class LoginPage extends DriverManager {
 
 
     public String getWelcomeTextFromLoginPage() {
+
         return welcomeTextOnLoginPage.getText();
     }
 

@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
         tags = "@login",
         plugin = "json:target/cucumber-report/cucumber.json"
 )
+
 public class RunCukesTest {
     // To run our test
     // a json report is generated as target/cucumber-report
