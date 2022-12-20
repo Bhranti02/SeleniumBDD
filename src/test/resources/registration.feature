@@ -16,4 +16,4 @@ Feature: Registration feature
     And I should see Log out button displayed
     And I should see text "/registerresult" in url
     
-    
+
