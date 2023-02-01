@@ -11,19 +11,19 @@ public class Hooks {
 
     @Before
     public void setUp() throws IllegalAccessException {
-        driverManager.runOnLocalBrowser();
-        // driverManager.runInHeadlessMode();
+        // driverManager.runOnLocalBrowser();
+         driverManager.runInHeadlessMode();
         driverManager.goToURL();
         driverManager.maxBrowser();
         driverManager.applyImplicitWait();
     }
 
     @After
-    public void tearDown(Scenario scenario) {  //scenario is a parameter from cucumber
+    public void tearDown(Scenario scenario) {                                   //scenario is a parameter from cucumber
+        // if scenario fail then take a screenshot
         if (scenario.isFailed()) {
             driverManager.takeScreenshot(scenario);
         }
-
         driverManager.closeBrowser();
     }
 }

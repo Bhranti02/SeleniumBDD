@@ -14,17 +14,17 @@ public class LoginSteps extends DriverManager {
     LoginPage loginPage = new LoginPage();
 
     @Then("^I should see \"([^\"]*)\" text on the login page$")
-    public void i_should_see_text_on_the_login_page(String expectedWelcomeTextOnLoginPage) throws Throwable {
-        String actualWelcomeText = loginPage.getWelcomeTextFromLoginPage();
+    public void i_should_see_text_on_the_login_page(String expectedWelcomeTextOnLoginPage) throws Throwable { //expected text from feature file
+        String actualWelcomeText = loginPage.getWelcomeTextFromLoginPage();  //we will get actual text via selenium
         System.out.println(actualWelcomeText);
         System.out.println(expectedWelcomeTextOnLoginPage);
-        assertThat(actualWelcomeText, is(equalToIgnoringCase(expectedWelcomeTextOnLoginPage)));
+        assertThat(actualWelcomeText, is(equalToIgnoringCase(expectedWelcomeTextOnLoginPage)));  // comparw both text
 
     }
 
     @And("^I should see text \"([^\"]*)\" in url$")
-    public void iShouldSeeTextInUrl(String expectedUrlText) throws Throwable {
-        String actualUrl = getURL();
+    public void iShouldSeeTextInUrl(String expectedUrlText) throws Throwable {   //expected Url from feature file
+        String actualUrl = getURL();   // via selenium
         System.out.println(actualUrl);
         assertThat(actualUrl, containsString(expectedUrlText));
     }

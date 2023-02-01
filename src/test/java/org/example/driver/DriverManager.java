@@ -25,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class DriverManager {
 
     public static WebDriver driver;
-    String browser = "chrome";
+    String browser = "chrome"; // To change browser, we need to change string so switch case match with same browser
     String baseURl = "https://demo.nopcommerce.com/";
 
     public DriverManager() {
@@ -59,10 +59,10 @@ public class DriverManager {
         switch (browser) {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
+                ChromeOptions chromeOptions = new ChromeOptions();    //chromeoptions is a class in selenium, create object of it,all methods to setup headless is in chromeoptions
                 chromeOptions.setHeadless(true);
                 chromeOptions.addArguments("--window-size=1920,1080");
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case "edge":
                 WebDriverManager.edgedriver().setup();
@@ -80,7 +80,6 @@ public class DriverManager {
             default:
                 throw new IllegalAccessException("Unexpected browser");
         }
-
     }
 
     public void maxBrowser() {
@@ -89,7 +88,7 @@ public class DriverManager {
 
     public void applyImplicitWait() {
         // for selenium 4
-        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         //for selenium 3.14
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -99,7 +98,7 @@ public class DriverManager {
         driver.quit();
     }
 
-    public void sleepBrowser(int ms) throws InterruptedException {
+    public void sleepBrowser(int ms) throws InterruptedException {   // int ms -whenever we required to pass time,we can use int ms (mili second)
         Thread.sleep(ms);
     }
 
@@ -108,16 +107,16 @@ public class DriverManager {
     }
 
     public String getURL() {
-        return driver.getCurrentUrl();
+        return driver.getCurrentUrl();  //current url will be in String,so return type String
     }
 
     public String getTitle() {
         return driver.getTitle();
     }
 
-    public WebElement waitUntillElementIsClickable(WebElement element) {
+    public WebElement waitUntilElementIsClickable(WebElement element) {   // to apply explicitly wait
         WebDriverWait wait = new WebDriverWait(driver, 20);
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
+        return wait.until(ExpectedConditions.elementToBeClickable(element));  // wait for 20 sec until expected conditions is clickable
     }
 
 
@@ -143,15 +142,15 @@ public class DriverManager {
 
     //take a screenshot when passing scenario fail
     public void takeScreenshot(Scenario scenario) {
-        //lines 109 & 110 to take screenshot and attach in our scenario's output after execution
+        //lines 146 & 147 to take screenshot and attach in our scenario's output after execution
         byte[] screenShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.embed(screenShot, "image/png");
 
-        //take screenshot and save in my machine as a file and see that file
+        //take screenshot and save in my local machine as a file and see that file
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         try {
-            FileUtils.copyFile(scrFile, new File("/C:/Users/bhran/Desktop/Screenshots Error/Error.jpg"));
+            FileUtils.copyFile(scrFile, new File("/C:/Users/bhran/Desktop/Screenshots Error/Error.jpg"));  //get path from folder on desktop
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -160,7 +159,7 @@ public class DriverManager {
 
     public int generateRandomNumber() {
         Random random = new Random();
-        return random.nextInt(100);
+        return random.nextInt(100); // number generate between 1-100
     }
 
     public static String getRandomString(int length) {

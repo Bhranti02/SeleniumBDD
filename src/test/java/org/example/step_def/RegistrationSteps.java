@@ -1,11 +1,17 @@
 package org.example.step_def;
 
+import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.example.driver.DriverManager;
 import org.example.pages.RegistrationPage;
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -57,17 +63,19 @@ public class RegistrationSteps extends DriverManager {
         System.out.println(expectedRegistrationConfirmText);
     }
 
-    @Then("^I should see Log out button displayed$")
-    public void i_should_see_Log_out_button_displayed() throws Throwable {
-        boolean logoutButtonIsDisplayed = registrationPage.checkLogoutButtonIsDisplayed();
-        assertThat(logoutButtonIsDisplayed, is(true));
+    @When("^I enter following data for registration$")
+    public void i_enter_following_data_for_registration(@NotNull DataTable dataTable) throws Throwable {
+        // converting dataTable into map
+        List<Map<String,String>> data = dataTable.asMaps(String.class, String.class);
+        // To store data into map, we need to declare map using listOfMap
+        System.out.println(data);
+        System.out.println(dataTable);
+        registrationPage.enterRegistrationDetails(
+                data.get(0).get("FirstName"),
+                data.get(0).get("LastName"),
+                data.get(0).get("email"),
+                data.get(0).get("Password"),
+                data.get(0).get("ConfirmPassword")
+        );
     }
-
-    @Then("^I should see text \"([^\"]*)\" in url$")
-    public void i_should_see_text_in_url(String expectedUrl) throws Throwable {
-        String actualUrl = getURL();
-        System.out.println(actualUrl);
-        assertThat(actualUrl, containsString(expectedUrl));
-    }
-
 }

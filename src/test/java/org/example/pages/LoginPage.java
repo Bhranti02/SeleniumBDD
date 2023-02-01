@@ -18,15 +18,14 @@ public class LoginPage extends DriverManager {
     @FindBy(css = ".login-button")
     WebElement loginButtonOnLoginPage;
 
-    @FindBy(css = ".ico-logout")
+    @FindBy(xpath = "/html/body/div[6]/div[1]/div[1]/div[2]/div[1]/ul/li[2]/a")
     WebElement logoutButton;
 
-    @FindBy(css = ".ico-account")
+    @FindBy(xpath = "/html/body/div[6]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a")
     WebElement myAccountButton;
 
 
     public String getWelcomeTextFromLoginPage() {
-
         return welcomeTextOnLoginPage.getText();
     }
 

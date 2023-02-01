@@ -1,3 +1,4 @@
+@regression
 Feature: Contact Us
   As a customer
   I want to use contact us feature

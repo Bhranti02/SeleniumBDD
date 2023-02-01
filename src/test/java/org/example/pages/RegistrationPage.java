@@ -27,7 +27,7 @@ public class RegistrationPage extends DriverManager {
     @FindBy(id = "register-button")
     WebElement clickOnRegisterButton;
 
-    @FindBy(xpath = "//*[@class=\"page-body\"]/div")
+    @FindBy(xpath = "/html/body/div[6]/div[3]/div/div/div/div[2]/div")
     WebElement registrationConfirmText;
 
     @FindBy(css = ".ico-logout")
@@ -53,8 +53,23 @@ public class RegistrationPage extends DriverManager {
         passwordInputField.sendKeys(password);
     }
 
-    public void enterConfirmPassword(String password) {
-        confirmPasswordInputField.sendKeys(password);
+    public void enterConfirmPassword(String confirmPassword) {
+        confirmPasswordInputField.sendKeys(confirmPassword);
+    }
+
+    public void enterRegistrationDetails(String firstName,String lastName,String email,String password,String confirmPassword){  //instead of 5 methods,one method only
+        firstNameInputField.clear();            //to clear previously entered data before entering new data
+        firstNameInputField.sendKeys(firstName);
+        lastNameInputField.clear();
+        lastNameInputField.sendKeys(lastName);
+        emailInputField.clear();
+        int myRandomNumber = generateRandomNumber();  //to generate random number
+        String myEmail = myRandomNumber+email;        //to use same random email for login feature
+        emailInputField.sendKeys(myRandomNumber+email);
+        passwordInputField.clear();
+        passwordInputField.sendKeys(password);
+        confirmPasswordInputField.clear();
+        confirmPasswordInputField.sendKeys(confirmPassword);
     }
 
     public void clickOnRegister() {
